@@ -98,6 +98,11 @@ namespace opencv_cam
       double width = capture_->get(cv::CAP_PROP_FRAME_WIDTH);
       double height = capture_->get(cv::CAP_PROP_FRAME_HEIGHT);
       double fps = capture_->get(cv::CAP_PROP_FPS);
+
+      double width = 1280;
+      double height = 720;
+      double fps = 25;
+
       RCLCPP_INFO(get_logger(), "device %d open, width %g, height %g, device fps %g",
                   cxt_.index_, width, height, fps);
     }
