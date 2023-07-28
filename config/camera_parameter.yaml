@@ -1,0 +1,6 @@
+/opencv_cam:
+  ros__parameters:
+    file: False      # Read from file vs. read from device
+    filename: 'my_camera.MOV'
+    camera_info_path: './camera_parameter.ini'
+    camera_frame_id: 'my_camera'

@@ -19,8 +19,8 @@ namespace opencv_cam
   CXT_MACRO_MEMBER(width, int, 0)                                 /* Device width */ \
   CXT_MACRO_MEMBER(height, int, 0)                                /* Device height */ \
   \
-  CXT_MACRO_MEMBER(camera_info_path, std::string, "info.ini")     /* Camera info path */ \
-  CXT_MACRO_MEMBER(camera_frame_id, std::string, "camera_frame")  /* Camera frame id */ \
+  CXT_MACRO_MEMBER(camera_info_path, std::string, "/home/carl-lab/test_ws/src/opencv_cam/config/camera_parameter.ini")     /* Camera info path */ \
+  CXT_MACRO_MEMBER(camera_frame_id, std::string, "my_camera")  /* Camera frame id */ \
 /* End of list */
 
 
