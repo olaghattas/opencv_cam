@@ -113,13 +113,15 @@ namespace opencv_cam
     if (camera_calibration_parsers::readCalibration(cxt_.camera_info_path_, camera_name, camera_info_msg_)) {
       RCLCPP_INFO(get_logger(), "got camera info for '%s'", camera_name.c_str());
       camera_info_msg_.header.frame_id = cxt_.camera_frame_id_;
-      camera_info_pub_ = create_publisher<sensor_msgs::msg::CameraInfo>("camera_info", 10);
+
+      /// Changed the topic name form camera_info to camera/color/camera_info
+      camera_info_pub_ = create_publisher<sensor_msgs::msg::CameraInfo>("camera/color/camera_info", 10);
     } else {
       RCLCPP_ERROR(get_logger(), "cannot get camera info, will not publish");
       camera_info_pub_ = nullptr;
     }
-
-    image_pub_ = create_publisher<sensor_msgs::msg::Image>("image_raw", 10);
+    /// Changed the topic name form image_raw to camera/color/image_raw
+    image_pub_ = create_publisher<sensor_msgs::msg::Image>("camera/color/image_raw", 10);
 
     // Run loop on it's own thread
     thread_ = std::thread(std::bind(&OpencvCamNode::loop, this));
