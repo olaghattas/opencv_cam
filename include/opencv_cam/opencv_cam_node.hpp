@@ -30,7 +30,11 @@ namespace opencv_cam
 
   public:
 
-    explicit OpencvCamNode(const rclcpp::NodeOptions &options);
+    explicit OpencvCamNode(const rclcpp::NodeOptions &options, const std::string cam_name,
+      const std::string image_topic_name, const std::string info_topic_name,
+      const std::string camera_frame_id, const std::string camera_info_path);
+
+  explicit OpencvCamNode(const rclcpp::NodeOptions &options);
 
     ~OpencvCamNode() override;
 
