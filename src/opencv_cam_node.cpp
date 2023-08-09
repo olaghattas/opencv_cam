@@ -23,8 +23,8 @@ namespace opencv_cam
     }
   }
 
-  OpencvCamNode::OpencvCamNode(const rclcpp::NodeOptions &options) :
-    Node("opencv_cam", options),
+  OpencvCamNode::OpencvCamNode(const rclcpp::NodeOptions &options, const std::string cam_name,const std::string image_topic_name, const std::string info_topic_name ) :
+    Node("opencv_cam" + name, options),
     canceled_(false)
   {
     RCLCPP_INFO(get_logger(), "use_intra_process_comms=%d", options.use_intra_process_comms());
@@ -100,8 +100,8 @@ namespace opencv_cam
       double fps = capture_->get(cv::CAP_PROP_FPS);
 
 
-      width = 1920;
-      height = 1080;
+//      width = 1920;
+//      height = 1080;
       fps = 30;
 
       RCLCPP_INFO(get_logger(), "device %d open, width %g, height %g, device fps %g",
@@ -114,14 +114,14 @@ namespace opencv_cam
       RCLCPP_INFO(get_logger(), "got camera info for '%s'", camera_name.c_str());
       camera_info_msg_.header.frame_id = cxt_.camera_frame_id_;
 
-      /// Changed the topic name form camera_info to camera/color/camera_info
-      camera_info_pub_ = create_publisher<sensor_msgs::msg::CameraInfo>("camera/color/camera_info", 10);
+      /// Changed the topic name from camera_info to camera/color/camera_info
+      camera_info_pub_ = create_publisher<sensor_msgs::msg::CameraInfo>(info_topic_name, 10);
     } else {
       RCLCPP_ERROR(get_logger(), "cannot get camera info, will not publish");
       camera_info_pub_ = nullptr;
     }
     /// Changed the topic name form image_raw to camera/color/image_raw
-    image_pub_ = create_publisher<sensor_msgs::msg::Image>("camera/color/image_raw", 10);
+    image_pub_ = create_publisher<sensor_msgs::msg::Image>(image_topic_name, 10);
 
     // Run loop on it's own thread
     thread_ = std::thread(std::bind(&OpencvCamNode::loop, this));

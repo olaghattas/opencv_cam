@@ -16,9 +16,14 @@ int main(int argc, char **argv)
   // Create and add camera node
   rclcpp::NodeOptions options{};
   options.use_intra_process_comms(true);
-  auto node = std::make_shared<opencv_cam::OpencvCamNode>(options);
-  executor.add_node(node);
 
+  std::vector<std::string> cam_names = {"camera_front", "camera_back"};
+  std::vector<std::shared_ptr<opencv_cam::OpencvCamNode>> nodes;
+  for (auto name : cam_names) {
+      auto node = std::make_shared<opencv_cam::OpencvCamNode>(options, name, );
+      executor.add_node(node);
+      nodes.push_back(node);
+  }
   // Spin until rclcpp::ok() returns false
   executor.spin();
 
