@@ -42,10 +42,10 @@ def generate_launch_description():
                 parameters=[{
                     'file': False,
                     'index': 1, # device /dev/video_index
-                    'camera_info_path': camera_info_path,
+                    'camera_info_path': '/home/pose_detection/src/opencv_cam/config/camera_parameter.ini',
                     'camera_frame_id': 'cam_1',
                     'camera_info_topic': "camera_1/color/camera_info",
-                    'camera_topic': "camera_2/color/image_raw",
+                    'camera_topic': "camera_1/color/image_raw",
 
                 }],
                 extra_arguments=[{'use_intra_process_comms': True}],
