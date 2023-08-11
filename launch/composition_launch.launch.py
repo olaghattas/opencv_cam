@@ -12,7 +12,7 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
 
-    camera_info_path = "/home/olagh/nano_cam_repo/src/opencv_cam/config/camera_parameter.ini"
+    camera_info_path = "/home/pose_detection/src/opencv_cam/config/camera_parameter.ini"
 
     container = ComposableNodeContainer(
         name='my_container',
@@ -23,14 +23,14 @@ def generate_launch_description():
             ComposableNode(
                 package='opencv_cam',
                 plugin='opencv_cam::OpencvCamNode',
-                name='image_publisher',
+                name='image_publisher_1',
                 parameters=[{
                     'file': False,
-                    'index': 2, # device /dev/video_index
+                    'index': 0, # device /dev/video_index
                     'camera_info_path': camera_info_path,
-                    'camera_frame_id': 'ola',
-                    'camera_info_topic': "camera/color/camerarte_info",
-                    'camera_topic': "camera/color/image_rdfgdfgdfaw",
+                    'camera_frame_id': 'cam_0',
+                    'camera_info_topic': "camera_0/color/camera_info",
+                    'camera_topic': "camera_0/color/image_raw",
 
                 }],
                 extra_arguments=[{'use_intra_process_comms': True}],
@@ -38,14 +38,14 @@ def generate_launch_description():
             ComposableNode(
                 package='opencv_cam',
                 plugin='opencv_cam::OpencvCamNode',
-                name='image_publisher',
+                name='image_publisher_2',
                 parameters=[{
                     'file': False,
-                    'index': 0, # device /dev/video_index
+                    'index': 1, # device /dev/video_index
                     'camera_info_path': camera_info_path,
-                    'camera_frame_id': 'newola',
-                    'camera_info_topic': "new/safasdfcolor/camerarte_info",
-                    'camera_topic': "new/coloccccr/image_rdfgdfgdfaw",
+                    'camera_frame_id': 'cam_1',
+                    'camera_info_topic': "camera_1/color/camera_info",
+                    'camera_topic': "camera_2/color/image_raw",
 
                 }],
                 extra_arguments=[{'use_intra_process_comms': True}],
